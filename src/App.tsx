@@ -1,18 +1,14 @@
 import { useState } from "react";
+import { HashRouter, Route, Routes } from "react-router-dom";
+import { Game } from "./domains/game/pages/game";
 
 function App() {
-  const [linkIsShown, setLinkIsShown] = useState(false);
-
-  const toggleShow = () => {
-    debugger
-    setLinkIsShown(!linkIsShown);
-  };
-
   return (
-    <>
-      <button onClick={toggleShow}>Show link</button>
-      {linkIsShown && <a href="https://google.com">Google</a>}
-    </>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Game />} />
+      </Routes>
+    </HashRouter>
   );
 }
 
