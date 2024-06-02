@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Game } from "./domains/game/pages/game";
+import "./common/stores/root.store";
 
-function App() {
+const App = () => {
+
   return (
     <HashRouter>
       <Routes>
@@ -10,6 +11,6 @@ function App() {
       </Routes>
     </HashRouter>
   );
-}
+};
 
 export default App;

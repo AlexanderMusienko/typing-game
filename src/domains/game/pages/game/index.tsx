@@ -1,9 +1,20 @@
+import { useStores } from "@/common/stores/root.store";
+import { toJS } from "mobx";
+import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 
 const DEAFULT_TEXT =
   "Raskolnikov was already entering the room. He came in looking as though he had the utmost difficulty not to burst out laughing again. Behind him  Razumihin strode in gawky and awkward, shamefaced and red as a peony,  with an utterly crestfallen and ferocious expression. His face and  whole figure really were ridiculous at that moment and amply justified Raskolnikov's laughter.";
 
-export const Game = () => {
+export const Game = observer(() => {
+  const {
+    appStore: { currentTheme },
+  } = useStores();
+
+  useEffect(() => {
+    console.log(toJS(currentTheme));
+  }, [currentTheme]);
+
   const [text, setText] = useState(DEAFULT_TEXT);
   const [textBeforeCursor, setTextBeforeCursor] = useState("");
   const [textAfterCursor, setTextAfterCursor] = useState(DEAFULT_TEXT.slice(1));
@@ -32,7 +43,7 @@ export const Game = () => {
   useEffect(() => {
     document.addEventListener("keydown", checkPressedButton);
     return () => {
-      console.log("unmount");
+      console.log("Clear effect");
       document.removeEventListener("keydown", checkPressedButton);
     };
   }, [checkPressedButton]);
@@ -48,4 +59,4 @@ export const Game = () => {
       <p>Right buttons count: {cursorPosition}</p>
     </main>
   );
-};
+});
