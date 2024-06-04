@@ -8,7 +8,7 @@ export const theme = {
       hint: "#575757", // Medium grey for hints or less important information
       accent: "#FFA1F5", // Bright blue for accent elements that need to stand out
       danger: "#FF0000", // Red for danger or error messages
-      success: "#00FF00", // Green for success messages
+      success: "#6EC175", // Green for success messages
     },
   },
   light: {
@@ -20,8 +20,7 @@ export const theme = {
       hint: "#B0B0B0", // Light grey for hints or less important information
       accent: "#FFA1F5", // Bright blue for accent elements that need to stand out
       danger: "#FF0000", // Red for danger or error messages
-      success: "#00FF00", // Green for success messages
+      success: "#6EC175", // Green for success messages
     },
   },
 };
-

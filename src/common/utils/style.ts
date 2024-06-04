@@ -14,14 +14,24 @@ export const normalizeCSS = (theme: TTheme) => css`
   * {
     font-family: "Open Sans", "Helvetica Neue", sans-serif, system-ui,
       -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+    box-sizing: border-box;
+  }
+
+  #root {
+    background-color: transparent;
+    height: 100%;
+  }
+
+  html {
+    height: 100%;
   }
 
   body {
     background-color: ${theme.colors.backgroundPrimary};
+    height: 100%;
   }
 
   div {
-    background-color: ${theme.colors.backgroundSecondary};
   }
 
   p,

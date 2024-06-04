@@ -3,9 +3,16 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { CursorKey } from "./ui/cursor";
+import { Text } from "@/shared/ui/text";
+import { GameContainer } from "./ui/game-container";
+import { PageWrapper } from "@/shared/ui/page-wrapper";
+import { TextContainer } from "./ui/text-container";
+import { TextForTyping } from "./ui/text-for-typing";
 
 const DEAFULT_TEXT =
   "Raskolnikov was already entering the room. He came in looking as though he had the utmost difficulty not to burst out laughing again. Behind him Razumihin strode in gawky and awkward, shamefaced and red as a peony, with an utterly crestfallen and ferocious expression. His face and  whole figure really were ridiculous at that moment and amply justified Raskolnikov's laughter.";
+
+const IGNORE_KEYS = ["Shift", "Control", "Alt", "CapsLock", "Tab", "Backspace"];
 
 export const Game = observer(() => {
   const {
@@ -28,10 +35,10 @@ export const Game = observer(() => {
   };
 
   const checkPressedButton = (e: KeyboardEvent) => {
+    // console.log(e);
     if (e.key === text[cursorPosition]) {
-      console.log("Right button");
       setCursorPosition(cursorPosition + 1);
-    } else {
+    } else if (!IGNORE_KEYS.includes(e.key)) {
       setWrongButtonsCount(wrongButtonsCount + 1);
     }
   };
@@ -53,15 +60,20 @@ export const Game = observer(() => {
   }, [checkPressedButton]);
 
   return (
-    <main>
-      <h1>Game</h1>
-      <p>
-        <span style={{ color: "green" }}>{textBeforeCursor}</span>
-        <CursorKey currentChar={cursorChar}>{cursorChar}</CursorKey>
-        {textAfterCursor}
-      </p>
-      <p>Right buttons count: {cursorPosition}</p>
-      <p>Wrong buttons count: {wrongButtonsCount}</p>
-    </main>
+    <PageWrapper>
+      <GameContainer>
+        <TextContainer>
+          <TextForTyping>
+            <Text fontSize="inherit" color={currentTheme.colors.success}>
+              {textBeforeCursor}
+            </Text>
+            <CursorKey currentChar={cursorChar}>{cursorChar}</CursorKey>
+            <Text fontSize="inherit" color={currentTheme.colors.primary}>
+              {textAfterCursor}
+            </Text>
+          </TextForTyping>
+        </TextContainer>
+      </GameContainer>
+    </PageWrapper>
   );
 });
