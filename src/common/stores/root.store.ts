@@ -1,9 +1,13 @@
+import { makeAutoObservable } from "mobx";
 import { AppStore } from "./app.store";
 
-export const appStore = new AppStore();
+export class RootStore {
+  constructor() {
+    makeAutoObservable(this);
+    this.appStore = new AppStore(this);
+  }
 
-export const useStores = () => {
-  return {
-    appStore,
-  };
-};
+  appStore: AppStore;
+}
+
+export const rootStore = new RootStore();
